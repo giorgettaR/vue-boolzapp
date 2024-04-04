@@ -208,6 +208,15 @@ div.sidebar {
     padding-right: 10px;
 }
 
+.sidebar .chats .chat.card {
+    cursor: pointer;
+}
+
+.sidebar .chats .chat.card.active,
+.sidebar .chats .chat.card:hover {
+    background-color: rgba(128, 128, 128, 0.226);
+}
+
 .sidebar .chats .chat .info {
     flex-grow: 1;
     position: relative;

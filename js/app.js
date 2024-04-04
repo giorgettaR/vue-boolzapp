@@ -3,7 +3,14 @@ const { createApp } = Vue
 createApp ({
     data() {
         return {
-            currentIndex: '',
+            currentIndex: 1,
+            newMessageText: '',
+            answer: 
+                {
+                    date: '',
+                    message: 'OK',
+                    status: 'received',
+                },
             contacts: [
                 {
                     name: 'Michele',
@@ -168,6 +175,54 @@ createApp ({
                 }
             ]
         }
+    },
+    methods: {
+        addMessage() {
+            if (this.newMessageText != '') {
+                let date = new Date();
+                let day = date.getDate();
+                let month = (date.getMonth()+1);
+                let hours = date.getHours();
+                let minutes = date.getMinutes();
+                let seconds = date.getSeconds();
+                if (day < 10) {
+                    day = `0${day}`;
+                }
+                if (month < 10) {
+                    month = `0${month}`;
+                }
+                if (hours < 10) {
+                    hours = `0${hours}`;
+                }
+                if (minutes < 10) {
+                    minutes = `0${minutes}`;
+                }
+                if (seconds < 10) {
+                    seconds = `0${seconds}`;
+                }
+                currentTime = `${day}/${month}/${date.getFullYear()} ${hours}:${minutes}:${seconds}`;
+                const newMessage = 
+                    {
+                        date: currentTime,
+                        message: this.newMessageText,
+                        status: 'sent',
+                    }
+                this.currentContact.messages.push(newMessage);
+                this.newMessageText = '';
+                setTimeout(() => {
+                    this.answer.date = currentTime
+                    this.currentContact.messages.push(this.answer)
+                }, 1000)
+            }
+        },
+    },
+    computed: {
+        currentContact: function () {
+            return this.contacts[this.currentIndex]
+        },
+        currentChat() {
+            return this.currentContact.messages
+        },
     },
     mounted() {
     }

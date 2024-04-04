@@ -43,6 +43,8 @@
                     <ul class="chats d-none d-m-flex">
                         <li 
                             v-for="(contact,i) in contacts"
+							:class="i === currentIndex ? 'active' : ''"
+							@click="currentIndex = i"
                             class="chat card"
                         >
                             <div class="img">
@@ -51,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="info d-none d-l-block">
-                                <span class="title">Michele</span><br>
+                                <span class="title">{{ contact.name }}</span><br>
                                 <span class="last-msg">Lorem ipsum dolor sit amet</span>
                                 <div class="time d-none d-l-block">16:15</div>
                             </div>
@@ -62,11 +64,11 @@
                     <div class="head card">
                         <div class="img">
                             <div class="avatar">
-                                <img src="./img/avatar_io.jpg" alt="">
+                                <img :src="currentContact.avatar" alt="">
                             </div>
                         </div>
                         <div class="info">
-                            <span class="title">Michele</span><br>
+                            <span class="title">{{ currentContact.name }}</span><br>
                             <span class="last-access">Lorem ipsum dolor sit amet 18:56</span>                        </div>
                         <div class="nav d-none d-l-flex">
                             <a href=""><i class="icon fa-solid fa-magnifying-glass"></i></a>
@@ -75,34 +77,22 @@
                         </div>
                     </div>
                     <div class="conversation">
-                        <div class="msg received">
-                            <div class="content">lorem</div>
-                            <span class="time">14:57</span>
-                        </div>
-                        <div class="msg sent">
-                            <div class="content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt saepe consectetur harum odit rerum, placeat iste, amet, sed praesentium quia quos? Voluptates maxime voluptate sunt nesciunt? Iusto vitae nobis minima?</div>
-                            <span class="time">14:57</span>
-                        </div>
-                        <div class="msg received">
-                            <div class="content">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo est voluptas temporibus deserunt aut in natus, reprehenderit reiciendis minus, veniam ab, consequatur ut iste explicabo dolorum inventore odit fugiat. Provident?</div>
-                            <span class="time">14:57</span>
-                        </div>
-                        <div class="msg received">
-                            <div class="content">Lorem, ipsum dolor sit amet consectetur adipisicing elit. </div>
-                            <span class="time">14:57</span>
-                        </div>
-                        <div class="msg sent">
-                            <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam perspiciatis totam, dolorum earum possimus quibusdam omnis dolorem illum placeat cupiditate quisquam fuga incidunt adipisci obcaecati nesciunt voluptates assumenda optio pariatur.</div>
-                            <span class="time">14:57</span>
-                        </div>
-                        <div class="msg sent">
-                            <div class="content">lorem</div>
-                            <span class="time">14:57</span>
+                        <div 
+                            v-for="(currentMessage) in currentChat"
+                            :class="currentMessage.status"
+                            class="msg">
+                            <div class="content">{{ currentMessage.message }}</div>
+                            <span class="time">{{ currentMessage.date.slice(11,16) }}</span>
                         </div>
                     </div>
                     <div class="type-in card">
                         <a class="emotes" href="#"><i class="fa-regular fa-face-smile"></i></a>
-                        <input type="text" placeholder="scrivi un messaggio">
+                        <input
+                            v-model.trim="newMessageText"
+                            @keyup.enter="addMessage"
+                            type="text" 
+                            placeholder="scrivi un messaggio"
+                            >
                         <a class="record" href="#"><i class="fa-solid fa-microphone"></i></a>
                     </div>
                 </div>
