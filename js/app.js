@@ -5,6 +5,7 @@ createApp ({
         return {
             currentIndex: 1,
             newMessageText: '',
+            searchValue: '',
             answer: 
                 {
                     date: '',
@@ -217,12 +218,30 @@ createApp ({
         },
     },
     computed: {
-        currentContact: function () {
+        currentContact() {
             return this.contacts[this.currentIndex]
         },
         currentChat() {
             return this.currentContact.messages
         },
+        visibleContacts() {
+            /*
+            if (this.searchValue != '') {
+                let stringSearch = this.searchValue.toLowerCase();
+                for (let i = 0; i < this.contacts.length; i++) {
+                    let lowerCaseName = this.contacts[i].name.toLowerCase();
+                    let found = lowerCaseName.match(stringSearch);
+                    if (found != []) {
+                        this.contacts[i].visible = true
+                    } else {
+                        this.contacts[i].visible = false
+                    }
+                }
+            }*/
+            return this.contacts.filter((contact) => {
+                return contact.name.toLowerCase().includes(this.searchValue.toLowerCase());
+            });
+        }
     },
     mounted() {
     }

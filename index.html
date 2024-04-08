@@ -38,11 +38,15 @@
                     </div>
                     <div class="search-bar d-none d-l-flex">
                         <i class="icon fa-solid fa-magnifying-glass"></i>
-                        <input type="text" placeholder="Cerca o inizia una nuova chat">
+                        <input
+                            v-model.trim="searchValue"
+                            type="text" 
+                            placeholder="Cerca o inizia una nuova chat"
+                        >
                     </div>
                     <ul class="chats d-none d-m-flex">
                         <li 
-                            v-for="(contact,i) in contacts"
+                            v-for="(contact,i) in visibleContacts"
 							:class="i === currentIndex ? 'active' : ''"
 							@click="currentIndex = i"
                             class="chat card"

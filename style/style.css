@@ -212,6 +212,10 @@ div.sidebar {
     cursor: pointer;
 }
 
+.sidebar .chats .chat.card.d-none {
+    display: none !important;
+}
+
 .sidebar .chats .chat.card.active,
 .sidebar .chats .chat.card:hover {
     background-color: rgba(128, 128, 128, 0.226);
@@ -305,6 +309,7 @@ div.sidebar {
     width: fit-content;
     max-width: 70%;
     margin: 1px 0;
+    min-width: 4rem;
 }
 
 .main .conversation .msg.sent {
