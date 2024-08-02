@@ -1,108 +1,98 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg" href="https://www.svgrepo.com/show/475692/whatsapp-color.svg" />
     <link rel="stylesheet" href="./style/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/0b0b1c9877.js" crossorigin="anonymous"></script>
-    <title>title</title>
+    <title>Roberto Giorgetta - WhatsaApp</title>
 </head>
+
 <body class="ebug">
     <div id="app">
         <div class="container">
-                <div class="sidebar d-none d-m-flex">
-                    <div class="head card">
-                        <div class="img">
-                            <div class="avatar">
-                                <img src="./img/avatar_io.jpg" alt="">
-                            </div>
-                        </div>
-                        <div class="nav d-none d-l-flex">
-                            <a href=""><i class="fa-solid fa-circle-notch"></i></a>
-                            <a href=""><i class="fa-solid fa-message"></i></a>
-                            <a href=""><i class="fa-solid fa-ellipsis-vertical"></i></a>
+            <div class="sidebar d-none d-m-flex">
+                <div class="head card">
+                    <div class="img">
+                        <div class="avatar">
+                            <img src="./img/avatar_io.jpg" alt="">
                         </div>
                     </div>
-                    <div class="alert card d-none d-l-flex">
-                        <div class="img">
-                            <div class="svg-container">
-                                <div class="svg-icon bell"></div>
-                            </div>
-                        </div>
-                        <div class="info">
-                            <span class="title">Ricevi notifiche di nuovi messaggi</span><br>
-                            <a class="link" href="#">Attiva notifiche desktop</a>
-                        </div>
-                    </div>
-                    <div class="search-bar d-none d-l-flex">
-                        <i class="icon fa-solid fa-magnifying-glass"></i>
-                        <input
-                            v-model.trim="searchValue"
-                            type="text" 
-                            placeholder="Cerca o inizia una nuova chat"
-                        >
-                    </div>
-                    <ul class="chats d-none d-m-flex">
-                        <li 
-                            v-for="(contact,i) in visibleContacts"
-							:class="i === currentIndex ? 'active' : ''"
-							@click="currentIndex = i"
-                            class="chat card"
-                        >
-                            <div class="img">
-                                <div class="avatar">
-                                    <img :src="contact.avatar" alt="">
-                                </div>
-                            </div>
-                            <div class="info d-none d-l-block">
-                                <span class="title">{{ contact.name }}</span><br>
-                                <span class="last-msg">Lorem ipsum dolor sit amet</span>
-                                <div class="time d-none d-l-block">16:15</div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="main">
-                    <div class="head card">
-                        <div class="img">
-                            <div class="avatar">
-                                <img :src="currentContact.avatar" alt="">
-                            </div>
-                        </div>
-                        <div class="info">
-                            <span class="title">{{ currentContact.name }}</span><br>
-                            <span class="last-access">Lorem ipsum dolor sit amet 18:56</span>                        </div>
-                        <div class="nav d-none d-l-flex">
-                            <a href=""><i class="icon fa-solid fa-magnifying-glass"></i></a>
-                            <a href=""><i class="fa-solid fa-paperclip"></i></a>
-                            <a href=""><i class="fa-solid fa-ellipsis-vertical"></i></a>
-                        </div>
-                    </div>
-                    <div class="conversation">
-                        <div 
-                            v-for="(currentMessage) in currentChat"
-                            :class="currentMessage.status"
-                            class="msg">
-                            <div class="content">{{ currentMessage.message }}</div>
-                            <span class="time">{{ currentMessage.date.slice(11,16) }}</span>
-                        </div>
-                    </div>
-                    <div class="type-in card">
-                        <a class="emotes" href="#"><i class="fa-regular fa-face-smile"></i></a>
-                        <input
-                            v-model.trim="newMessageText"
-                            @keyup.enter="addMessage"
-                            type="text" 
-                            placeholder="scrivi un messaggio"
-                            >
-                        <a class="record" href="#"><i class="fa-solid fa-microphone"></i></a>
+                    <div class="nav d-none d-l-flex">
+                        <a href=""><i class="fa-solid fa-circle-notch"></i></a>
+                        <a href=""><i class="fa-solid fa-message"></i></a>
+                        <a href=""><i class="fa-solid fa-ellipsis-vertical"></i></a>
                     </div>
                 </div>
+                <div class="alert card d-none d-l-flex">
+                    <div class="img">
+                        <div class="svg-container">
+                            <div class="svg-icon bell"></div>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <span class="title">Ricevi notifiche di nuovi messaggi</span><br>
+                        <a class="link" href="#">Attiva notifiche desktop</a>
+                    </div>
+                </div>
+                <div class="search-bar d-none d-l-flex">
+                    <i class="icon fa-solid fa-magnifying-glass"></i>
+                    <input v-model.trim="searchValue" type="text" placeholder="Cerca o inizia una nuova chat">
+                </div>
+                <ul class="chats d-none d-m-flex">
+                    <li v-for="(contact,i) in visibleContacts" :class="i === currentIndex ? 'active' : ''"
+                        @click="currentIndex = i" class="chat card">
+                        <div class="img">
+                            <div class="avatar">
+                                <img :src="contact.avatar" alt="">
+                            </div>
+                        </div>
+                        <div class="info d-none d-l-block">
+                            <span class="title">{{ contact.name }}</span><br>
+                            <span class="last-msg">Lorem ipsum dolor sit amet</span>
+                            <div class="time d-none d-l-block">16:15</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="main">
+                <div class="head card">
+                    <div class="img">
+                        <div class="avatar">
+                            <img :src="currentContact.avatar" alt="">
+                        </div>
+                    </div>
+                    <div class="info">
+                        <span class="title">{{ currentContact.name }}</span><br>
+                        <span class="last-access">Lorem ipsum dolor sit amet 18:56</span>
+                    </div>
+                    <div class="nav d-none d-l-flex">
+                        <a href=""><i class="icon fa-solid fa-magnifying-glass"></i></a>
+                        <a href=""><i class="fa-solid fa-paperclip"></i></a>
+                        <a href=""><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                    </div>
+                </div>
+                <div class="conversation">
+                    <div v-for="(currentMessage) in currentChat" :class="currentMessage.status" class="msg">
+                        <div class="content">{{ currentMessage.message }}</div>
+                        <span class="time">{{ currentMessage.date.slice(11,16) }}</span>
+                    </div>
+                </div>
+                <div class="type-in card">
+                    <a class="emotes" href="#"><i class="fa-regular fa-face-smile"></i></a>
+                    <input v-model.trim="newMessageText" @keyup.enter="addMessage" type="text"
+                        placeholder="scrivi un messaggio">
+                    <a class="record" href="#"><i class="fa-solid fa-microphone"></i></a>
+                </div>
+            </div>
         </div>
     </div>
     <script src='https://unpkg.com/vue@3/dist/vue.global.js'></script>
     <script src="./js/app.js"></script>
 </body>
+
 </html>
